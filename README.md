@@ -34,6 +34,10 @@ path:
 - View Results Tree
 - Aggregated Reports
 
+# Defining Loads
+- Assumed that there will be less login and signup hits, 50 Threads x 8 (4 exception, 4 homepage group)
+- Most call will be made for CRUD operations, 100 Threads x 8 requests 
+
 # Test Execution
 ## JMeter UI
 - Download the file
