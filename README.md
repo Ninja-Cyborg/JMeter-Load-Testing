@@ -1,52 +1,54 @@
 # JMeter-Load-Testing
-Load Tests ran on public api
+Performed Load Testing on [Reqres API](https://reqres.in/).  
 
-
-path:
-- E:\Downloads\apache-jmeter-5.5\bin>jmeter -g "C:\Users\dell\Downloads\dummy-Rest-API-RECORD-01-22-23-9-42-08-PM (1).jmx" -l "C:\Users\dell\Downloads\dummy-api/report.csv" -e -o "C:\Users\dell\Downloads\dummy-api/html_report"    
-
+# Key Learnings
 # Requirements
 # Environment Setup
 # Test Execution
 # Reports
 
+# Key Learnings
+- Executing Load Test: Performed over 7,000 requests ramped in 30 seconds
+- Implemented Loop Controllers, Response Assertions
+- Parametrisation for Authentication
+- Both Happy Path and Bad Path requests were tested under load
+- Generated Output Reports
+
 # Requirements
 - JMeter
-- 
+- Java 8 or Higher
 
 # Environment Setup
-##  Test Scripts:
-- Primary api tests are imported with [BlazeMeter Chrome Extension](https://chrome.google.com/webstore/detail/blazemeter-the-continuous/mbopgmdnpcbohhpnfglgohlbhfongabi) in .jmx format
-- Test for looping through user ID's, resources and 
+## Test Scripts:
+- Basic api tests are generated in Browser using [BlazeMeter Chrome Extension](https://chrome.google.com/webstore/detail/blazemeter-the-continuous/mbopgmdnpcbohhpnfglgohlbhfongabi)
 
 # Test Plan Structure
 ## User Defined Variables:
 - api URL, Basic Auth Credntials
-## Thread Groups:
-##  Homepage Thread Group:
-- Tests for Main page actions Login, Register, mislleneous 
-## CRUD Operation Thread Group:
-- Tests executing CRUD operations on User and Resources
-## Exception Paths Thread Group
-- Includes Request that lead to 400 or 404 error
 
-## Listeners:
-- View Results Tree
-- Aggregated Reports
-
-# Defining Loads
-- Assumed that there will be less login and signup hits, 50 Threads x 8 (4 exception, 4 homepage group)
-- Most call will be made for CRUD operations, 100 Threads x 8 requests 
+## Defining Loads/ Thread Groups
+### CRUD Operations
+- Most call will be made for CRUD operations, 250 Threads x 8 requests
+- request performing CRUD operations on Users ad Resources
+### Homepage requests
+- Assumed that there will be less login and signup hits, 200 Threads x 4 
+- includes basic request, login, register, open homepage
+### Expection Paths
+- bad requests will be least, 50 Threads x 5
+- includes request leading to 400 or 404 error
 
 # Test Execution
 ## JMeter UI
-- Download the file
-- Import and run the file in JMeter
+- [Download .jmx file](dummy-Rest-API-RECORD-01-22-23.jmx)
+- Import the file in JMeter
+- Before running *Disable Listerners*: Each Thread Group has Listerners, make sure to disable then while load testing. As the are resource hungry.
 ## Windows command line
-- jmeter -n -t "specify location\filename" -l "location of .csv result reports" -e -o "location of html reports"
+- jmeter -n -t "specify location\filename" -l "location of .csv result reports" -e -o "location of html report folder"
 ## Linux 
-- sh jmeter -n -t "specify location\filename" -l "location of .csv result report" -e -o "location of html reports"
+- sh jmeter -n -t "specify location\filename" -l "location of .csv result report" -e -o "location of html report folder"
 
-# Reports
+# Result Reports
 - HTML Reports
-- CSV Report
+- ![image](https://user-images.githubusercontent.com/66517017/233163834-92d1db4d-1f9a-40c7-ae4c-325ccceb1137.png)
+- Logging Report
+- [Logs](https://github.com/Ninja-Cyborg/JMeter-Load-Testing/blob/main/log_report.csv)
